@@ -1,0 +1,33 @@
+diff -up llvm-3.3.src/tools/clang/lib/Driver/Driver.cpp.fix llvm-3.3.src/tools/clang/lib/Driver/Driver.cpp
+--- llvm-3.3.src/tools/clang/lib/Driver/Driver.cpp.fix	2013-10-23 14:46:33.850061718 -0400
++++ llvm-3.3.src/tools/clang/lib/Driver/Driver.cpp	2013-10-23 14:46:52.595060591 -0400
+@@ -66,7 +66,7 @@ Driver::Driver(StringRef ClangExecutable
+   if (ClangResourceDir != "")
+     llvm::sys::path::append(P, ClangResourceDir);
+   else
+-    llvm::sys::path::append(P, "..", "lib", "clang", CLANG_VERSION_STRING);
++    llvm::sys::path::append(P, "..", "lib64", "clang", CLANG_VERSION_STRING);
+   ResourceDir = P.str();
+ }
+ 
+diff -up llvm-3.3.src/tools/clang/lib/Headers/Makefile.fix llvm-3.3.src/tools/clang/lib/Headers/Makefile
+--- llvm-3.3.src/tools/clang/lib/Headers/Makefile.fix	2013-10-23 14:31:13.852062442 -0400
++++ llvm-3.3.src/tools/clang/lib/Headers/Makefile	2013-10-23 14:33:19.904062593 -0400
+@@ -17,7 +17,7 @@ include $(CLANG_LEVEL)/Makefile
+ CLANG_VERSION := $(word 3,$(shell grep "CLANG_VERSION " \
+ 	$(PROJ_OBJ_DIR)/$(CLANG_LEVEL)/include/clang/Basic/Version.inc))
+ 
+-HeaderDir := $(PROJ_OBJ_ROOT)/$(BuildMode)/lib/clang/$(CLANG_VERSION)/include
++HeaderDir := $(PROJ_OBJ_ROOT)/$(BuildMode)/lib64/clang/$(CLANG_VERSION)/include
+ 
+ HEADERS := $(notdir $(wildcard $(PROJ_SRC_DIR)/*.h))
+ 
+@@ -40,7 +40,7 @@ $(HeaderDir)/module.map: $(PROJ_SRC_DIR)
+ # Hook into the standard Makefile rules.
+ all-local:: $(OBJHEADERS) $(HeaderDir)/module.map
+ 
+-PROJ_headers := $(DESTDIR)$(PROJ_prefix)/lib/clang/$(CLANG_VERSION)/include
++PROJ_headers := $(DESTDIR)$(PROJ_prefix)/lib64/clang/$(CLANG_VERSION)/include
+ 
+ INSTHEADERS := $(addprefix $(PROJ_headers)/, $(HEADERS))
+ INSTHEADERS += $(PROJ_headers)/arm_neon.h

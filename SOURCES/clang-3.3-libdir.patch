@@ -1,0 +1,12 @@
+diff -up llvm-3.3.src/Makefile.config.in.fix llvm-3.3.src/Makefile.config.in
+--- llvm-3.3.src/Makefile.config.in.fix	2013-10-22 20:18:18.805136653 -0400
++++ llvm-3.3.src/Makefile.config.in	2013-10-22 20:19:13.724137064 -0400
+@@ -95,7 +95,7 @@ PROJ_internal_prefix := $(prefix)
+ endif
+ 
+ PROJ_bindir     := $(PROJ_prefix)/bin
+-PROJ_libdir     := $(PROJ_prefix)/lib
++PROJ_libdir     := @libdir@
+ PROJ_datadir    := $(PROJ_prefix)/share
+ PROJ_docsdir    := $(PROJ_prefix)/docs/llvm
+ PROJ_etcdir     := $(PROJ_prefix)/etc/llvm
